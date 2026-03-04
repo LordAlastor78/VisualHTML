@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VisualHTML</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 180px 1fr;
+        background: #f7f7f8;
+      }
+
+      .editor-wrap {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        background: #fff;
+      }
+
+      textarea {
+        width: 100%;
+        height: 100%;
+        resize: none;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 14px;
+      }
+
+      .preview-wrap {
+        padding: 12px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="editor-wrap">
+      <textarea id="htmlInput" aria-label="Editor HTML"></textarea>
+    </div>
+
+    <div class="preview-wrap">
+      <iframe id="preview" title="Vista previa" sandbox="allow-scripts"></iframe>
+    </div>
+
+    <script>
+      const htmlInput = document.getElementById('htmlInput');
+      const preview = document.getElementById('preview');
+
+      const starter = `<!doctype html>
+<html>
+  <head>
+    <style>
+      body { font-family: sans-serif; padding: 16px; }
+      h1 { color: #0a66c2; }
+    </style>
+  </head>
+  <body>
+    <h1>Hola VisualHTML</h1>
+    <p>Escribe tu HTML arriba y lo verás aquí.</p>
+  </body>
+</html>`;
+
+      function render() {
+        preview.srcdoc = htmlInput.value;
+      }
+
+      htmlInput.value = starter;
+      htmlInput.addEventListener('input', render);
+      render();
+    </script>
+  </body>
+</html>
